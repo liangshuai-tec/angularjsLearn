@@ -12,7 +12,7 @@ var tslib_1 = require("tslib");
 输出的模块格式是 commonjs
 
 需要更改：
-    "module": "es2020",  规范更改为
+    "module": "es2020",   (ES11)  规范更改为   
     "module": "commonjs"
 
 
