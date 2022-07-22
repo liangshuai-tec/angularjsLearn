@@ -29,19 +29,23 @@ angular.module('myApp',[])
 .directive('kittencupCollapse',function(){
     return {
         restrict:'E',
-        require:'^kittencupGroup',  // 指令引用
-        template:'<div><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title" ng-click="selectChange()">{{heading}}</h4></div><div ng-class="{\'panel-collapse\':true, collapse:isOpen}"><div class="panel-body" ng-transclude></div></div></div>',
+        require:'^kittencupGroup',  // 指令引用  
+        template:'<div class="panel panel-default"><div class="panel-heading" ng-click="openChange()"><h4 class="panel-title" >{{heading}}</h4></div><div ng-class="{\'panel-collapse\':true, collapse:isOpen}"><div class="panel-body" ng-transclude></div></div>',
         replace:true,
         transclude: true,
         scope:{
-            heading:'@heading'
+            // heading:'@heading',
+            heading:'@'
         },
-        controller:['$scope',function($scope,Data){
+        controller:['$scope','Data',function($scope,Data){
             $scope.isOpen = true;
-            $scope.selectChange = function(){
+            console.log(Data);
+            $scope.openChange = function(){
                 $scope.isOpen = !$scope.isOpen;
             }
         }]
+
+
         
     }
 })
