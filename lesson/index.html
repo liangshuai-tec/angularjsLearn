@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/angular.min.js"></script>
+    <script src="./lib/angular-route.js"></script>
+   <link rel="stylesheet" href="./lib/bootstrap.min.css">
+</head>
+<body >
+    <div  ng-controller="firstController">
+       <kittencup-group>
+            <kittencup-collapse ng-repeat="collapse in data" heading="{{collapse.title}}">
+                {{collapse.content}}
+            </kittencup-collapse>
+       </kittencup-group>
+    </div>
+
+    <script src="./1.js"></script>
+</body>
+</html>

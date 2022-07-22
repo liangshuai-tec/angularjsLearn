@@ -1,0 +1,17 @@
+ng-transclude
+
+自定义指令 directive:
+
+controller
+
+directive 之间传参
+
+link 
+
+
+1.js
+用 angular 仿写
+bootstrap.min.css  javascript插件
+
+指令模板：
+templateUrl 引入模板报错未解决
