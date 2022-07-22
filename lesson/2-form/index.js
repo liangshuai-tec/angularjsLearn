@@ -1,4 +1,8 @@
 angular.module('myApp',[])
 .controller('firstController',['$scope',function($scope){
-    $scope.username=""
+    $scope.data = {
+        username:"",
+        password:"",
+        confirmPassword:""
+    }
 }])
