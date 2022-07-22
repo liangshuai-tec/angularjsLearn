@@ -19,7 +19,7 @@ angular.module('myApp',[])
 .directive('kittencupGroup',function(Data){
     return {
         restrict:'E',
-        template:'<div ng-transclude></div>',
+        template:'<div class="panel-group" ng-transclude></div>',
         replace: true,
         transclude: true,
         controllerAs:'kittencupGroupController',
@@ -41,7 +41,7 @@ angular.module('myApp',[])
 .directive('kittencupCollapse',function(){
     return {
         restrict:'E',
-        template:'<div class="panel panel-default"><div class="panel-heading" ng-click="openChange()"><h4 class="panel-title" >{{heading}}</h4></div><div ng-class="{\'panel-collapse\':true, collapse:!isOpen}"><div class="panel-body" ng-transclude></div></div>',
+        template:'<div class="panel panel-default"><div class="panel-heading" ng-click="openChange()"><h4 class="panel-title" >{{heading}}</h4></div><div class="panel-collapse" ng-class="{collapse:!isOpen}"><div class="panel-body" ng-transclude></div></div>',
         replace:true,
         transclude: true,
         scope:{
