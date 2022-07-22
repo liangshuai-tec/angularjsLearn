@@ -1,0 +1,15 @@
+form表单
+1、如何绑定数据
+2、验证表单
+3、显示出错信息
+4、整个Form的验证
+5、避免提交没有验证通过的表单
+
+
+angular提供指令列表：
+ng-model
+ng-required
+ng-minlength
+ng-maxlength
+ng-pattern
+ng-change
