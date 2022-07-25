@@ -48,18 +48,81 @@
         </div>
 
 
-        <!-- confirmPassword   url   email -->
+        <!-- confirmPassword   blog   email -->
         <div class="form-group" ng-class="{'has-error':myForm.confirmPassword.$dirty && myForm.confirmPassword.$invalid}">
             <label class="col-sm-2 control-label">确认密码</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" name="confirmPassword" autocomplete="false" ng-pattern="/^[a-zA-Z]{1}/" ng-required="true"  ng-model="data.confirmPassword" placeholder="确认密码">
+                <input type="password" class="form-control" name="confirmPassword" autocomplete="false" ng-required="true"  ng-model="data.confirmPassword" placeholder="确认密码">
                 <div ng-show="myForm.password.$dirty && myForm.confirmPassword.$dirty && data.confirmPassword != data.password" class="alert alert-danger help-block">
-                    密码不一致
+                    密码和确认密码不一致
                 </div>
             </div>
         </div>
-        {{data.confirmPassword}}
-        {{data.password}}
+        {{myForm.confirmPassword.$error}}
+
+
+        <!--  email -->
+        <div class="form-group" ng-class="{'has-error':myForm.email.$dirty && myForm.email.$invalid}">
+            <label class="col-sm-2 control-label">邮箱</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" name="email" autocomplete="false"  ng-required="true"  ng-model="data.email" ng-minlength="5" ng-maxlength="30"  placeholder="输入邮箱地址">
+                <div ng-show="myForm.email.$error.minlength" class="alert alert-danger help-block">
+                    邮箱长度不能小于5位
+                </div>
+                <div ng-show="myForm.email.$error.maxlength" class="alert alert-danger help-block">
+                    邮箱长度不能大于30位
+                </div>
+                <div ng-show="myForm.email.$error.email" class="alert alert-danger help-block">
+                    邮箱格式不对
+                </div>
+            </div>
+        </div>
+        {{myForm.email.$error}}
+
+        <!--  url -->
+        <div class="form-group" ng-class="{'has-error':myForm.blog.$dirty && myForm.blog.$invalid}">
+            <label class="col-sm-2 control-label">博客网址</label>
+            <div class="col-sm-10">
+                <input type="url" class="form-control" name="blog" autocomplete="false"  ng-required="true"  ng-model="data.blog" ng-minlength="5" ng-maxlength="30"  placeholder="博客网址">
+                <div ng-show="myForm.blog.$error.minlength" class="alert alert-danger help-block">
+                    网址长度不能小于5位
+                </div>
+                <div ng-show="myForm.blog.$error.maxlength" class="alert alert-danger help-block">
+                    网址长度不能大于30位
+                </div>
+                <div ng-show="myForm.blog.$error.url" class="alert alert-danger help-block">
+                    网址格式不对
+                </div>
+            </div>
+        </div>
+        {{myForm.blog.$error}}
+        <!-- 性别 -->
+        <!-- radio checkbox选择框无法获取校验 ？？？？ -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">性别</label>
+            <div class="col-sm-10">
+                <label class="radio-inline">
+                    <input type="radio" name="sex" ng-model="data.sex" value="1"  />男
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="sex" ng-model="data.sex" value="0"  />女
+                </label>
+            </div>
+        </div>
+
+         <!-- 爱好 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">爱好</label>
+            <div class="col-sm-10">
+                <label class="checkbox-inline" ng-repeat="hobby in hobbies">
+                    <input type="checkbox" name="hobby[]" value="hobby.id"  ng-checked="data.hobbies.indexOf(hobby.id) !== -1"  ng-click="toggleHobbySelection(hobby.id)"  />{{hobby.name}}{{hobby.id}}
+                </label>
+            </div>
+        </div>
+
+
+        {{}}
+
 
     </form>
 
