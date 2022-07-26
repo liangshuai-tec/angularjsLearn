@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../lib/bootstrap.min.css">
 </head>
 <body ng-app="myApp" >
-    <form  name="myForm" style="margin-top: 30px;" ng-controller="firstController" class="container form-horizontal">
+    <form  name="myForm" action="/angular.php" style="margin-top: 30px;" ng-controller="firstController" class="container form-horizontal">
         <!-- type=text -->
         <div class="form-group" ng-class="{'has-error':myForm.username.$dirty && myForm.username.$invalid}">
             <label class="col-sm-2 control-label">用户名</label>
@@ -102,7 +102,7 @@
             <label class="col-sm-2 control-label">性别</label>
             <div class="col-sm-10">
                 <label class="radio-inline">
-                    <input type="radio" name="sex" ng-model="data.sex" value="1"  />男
+                    <input type="radio" name="sex" ng-required="true"  ng-model="data.sex" value="1"  />男
                 </label>
                 <label class="radio-inline">
                     <input type="radio" name="sex" ng-model="data.sex" value="0"  />女
@@ -115,14 +115,81 @@
             <label class="col-sm-2 control-label">爱好</label>
             <div class="col-sm-10">
                 <label class="checkbox-inline" ng-repeat="hobby in hobbies">
-                    <input type="checkbox" name="hobby[]" value="hobby.id"  ng-checked="data.hobbies.indexOf(hobby.id) !== -1"  ng-click="toggleHobbySelection(hobby.id)"  />{{hobby.name}}{{hobby.id}}
+                    <input type="checkbox" name="hobby[]" value="hobby.id"  ng-checked="data.hobbies.indexOf(hobby.id) !== -1"  ng-click="toggleHobbyselect(hobby.id)"  />{{hobby.name}}{{hobby.id}}
                 </label>
             </div>
         </div>
 
+        <!-- number -->
+        <div class="form-group" ng-class="{'has-error':myForm.age.$dirty && myForm.age.$invalid}">
+            <label class="col-sm-2 control-label">年龄</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="age" autocomplete="false"  ng-required="true"  ng-model="data.age" min="0" max="99"  placeholder="年龄">
+                <div ng-show="myForm.age.$error.min" class="alert alert-danger help-block">
+                    年龄不小于0岁
+                </div>
+                <div ng-show="myForm.age.$error.max" class="alert alert-danger help-block">
+                    年龄不能大于99岁
+                </div>
+            </div>
+        </div>
 
-        {{}}
+        <!-- 三级联动 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">出生地</label>
+            <div class="col-sm-3">
+                <select class="form-control" ng-model="data.province" ng-options="x.id as x.name for x in cities | cityFilter:0"></select>
+            </div>
 
+            <div class="col-sm-3">
+                <select class="form-control" ng-model="data.area" ng-show="data.province" ng-options="x.id as x.name for x in cities | cityFilter:data.province"></select>
+            </div>
+
+            <div class="col-sm-3">
+                <select class="form-control" ng-model="data.city" ng-show="data.area" ng-required="true"  ng-options="x.id as x.name for x in cities | cityFilter:data.area"></select>
+            </div>
+        </div>
+
+        <!-- 自定义表单，ngModel属性 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">只能输入偶数</label>
+            <div class="col-sm-10">
+                <input type="text" name="even" even class="form-control" placeholder="偶数" ng-model="data.even" >
+                <div ng-show="myForm.even.$error.even" class="alert alert-danger help-block">
+                    数字必须是偶数
+                </div>
+            </div>
+        </div>
+
+        {{myForm.even.$error.even}}
+
+        <!-- 自定义表单，ngModel属性, 自定义指令-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">个人介绍</label>
+            <div class="col-sm-10">
+                <customer-text-area ng-model="data.introduct"></customer-text-area>
+                <!-- <div ng-show="myForm.even.$error.even" class="alert alert-danger help-block">
+                    数字必须是偶数
+                </div> -->
+            </div>
+        </div>
+        {{data.introduct}}
+
+
+
+
+
+        <!-- submit  reset -->
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-3">
+                <input type="submit" class="form-control" ng-disabled="myForm.$invalid"  value="注冊">
+            </div>
+            <div class="col-sm-3">
+                <!-- <input type="reset" class="form-control"   value="重置"> -->
+                <input type="button" class="form-control" ng-click="resetFunc()"  value="重置">
+            </div>
+        </div>
+        {{myForm.$invalid}}
 
     </form>
 
